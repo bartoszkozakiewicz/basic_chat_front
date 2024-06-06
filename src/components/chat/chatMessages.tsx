@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import ChatSingle from "./chatSingle";
 //----------------------------------
 
@@ -7,8 +7,16 @@ type Props = {
 };
 
 const ChatMessages = ({ messages }: Props) => {
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
   return (
-    <div className="flex flex-col gap-4 h-[100%]">
+    <div className="flex flex-col gap-4 h-[100%] max-h-[100%] overflow-auto ">
       {messages &&
         messages.map((message, index) => (
           <ChatSingle
@@ -17,6 +25,7 @@ const ChatMessages = ({ messages }: Props) => {
             message={message.message}
           />
         ))}
+      <div ref={messagesEndRef} />
     </div>
   );
 };

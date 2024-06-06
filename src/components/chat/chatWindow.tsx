@@ -54,8 +54,8 @@ const ChatWindow = () => {
   };
 
   return (
-    <div className="h-100vh w-[60%] bg-gray-100 p-16">
-      <div className="flex flex-col h-[100%] justify-between ">
+    <div className="h-100vh max-h-100vh w-[60%] bg-gray-100 p-16">
+      <div className="flex flex-col h-[100%] max-h-[100%] justify-between ">
         <ChatMessages messages={messages} />
         <TextField
           value={currentMessage}
